@@ -220,7 +220,6 @@
     </Content>
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <None Include="packages.config" />
-    <Content Include="readme.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0472C20-536B-4CCD-BE59-3CC077FAFA79}"
 	ProjectSection(SolutionItems) = preProject
 		qna-sample-diagram.png = qna-sample-diagram.png
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
