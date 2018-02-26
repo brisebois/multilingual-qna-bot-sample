@@ -70,8 +70,7 @@ Use these to update the **Web.Config**.
 </appSettings>
 ```
 
-Now publish the sample to the previously created Web Appand you should be albe to test your bot from the **
-Test in Web Chat** blade located in the **Bot Channels Registration** resource.
+Now publish the sample to the previously created Web Appand you should be albe to test your bot from the **Test in Web Chat** blade located in the **Bot Channels Registration** resource.
 
 ## More
 - [Microsoft Bot Builder](https://github.com/Microsoft/BotBuilder) GitHub Repository
