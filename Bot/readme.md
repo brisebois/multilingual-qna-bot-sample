@@ -1,6 +1,6 @@
 ﻿# Multilingual Q&A Bot Sample
 
-![sample diagram](../qna-sample-diagram.png)
+![sample diagram](https://github.com//brisebois/multilingual-qna-bot-sample/blob/master/qna-sample-diagram.png?raw=true)
 
 This sample was built to demonstrate an approach to detecting the language of a question of forwarding it to the correct QnA Knowldgebase.
 
