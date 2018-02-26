@@ -77,4 +77,4 @@ Test in Web Chat** blade located in the **Bot Channels Registration** resource.
 - [Microsoft Bot Builder](https://github.com/Microsoft/BotBuilder) GitHub Repository
   - [Bot Builder Samples](https://github.com/Microsoft/BotBuilder/tree/master/CSharp/Samples)
 - [Samples for Common Bot Framework Scenarios](https://github.com/Microsoft/AzureBotServices-scenarios)
-- Community example of that can be built is this independent [QnAMakerDialog](https://github.com/garypretty/botframework/tree/master/QnAMakerDialog)
+- Community example of that can be built : [QnAMakerDialog](https://github.com/garypretty/botframework/tree/master/QnAMakerDialog)
