@@ -28,10 +28,10 @@ namespace MultilingualQnA.Services
             // this can cause some confusion
 
             var detectedLanguage = result.Documents.First()
-                                          .DetectedLanguages
-                                            .Where(dl => dl.Score.HasValue)
-                                            .OrderByDescending(dl=>dl.Score)
-                                            .First();
+                .DetectedLanguages
+                .Where(dl => dl.Score.HasValue)
+                .OrderByDescending(dl => dl.Score)
+                .First();
 
             return detectedLanguage;
         }

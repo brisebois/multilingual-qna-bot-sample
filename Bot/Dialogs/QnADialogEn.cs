@@ -1,17 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Bot.Builder.CognitiveServices.QnAMaker;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
 namespace MultilingualQnA.Dialogs
 {
+    [Serializable]
     [QnAMaker(subscriptionKey: "<QnAMaker Subscription Key>",
-              knowledgebaseId: "<QnA Maker KB ID>",
-              scoreThreshold: 0.5D,
-              top: 3)]
+        knowledgebaseId: "<QnA Maker KB ID>",
+        scoreThreshold: 0.5D,
+        top: 3)]
     public class QnADialogEn : QnAMakerDialog
     {
-        protected override Task DefaultWaitNextMessageAsync(IDialogContext context, IMessageActivity message, QnAMakerResults result)
+        protected override Task DefaultWaitNextMessageAsync(IDialogContext context, IMessageActivity message,
+            QnAMakerResults result)
         {
             return base.DefaultWaitNextMessageAsync(context, message, result);
         }
@@ -26,7 +29,8 @@ namespace MultilingualQnA.Dialogs
             return base.QnAFeedbackStepAsync(context, qnaMakerResults);
         }
 
-        protected override Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message, QnAMakerResults result)
+        protected override Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message,
+            QnAMakerResults result)
         {
             return base.RespondFromQnAMakerResultAsync(context, message, result);
         }

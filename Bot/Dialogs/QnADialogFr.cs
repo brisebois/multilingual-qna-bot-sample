@@ -6,14 +6,15 @@ using Microsoft.Bot.Connector;
 
 namespace MultilingualQnA.Dialogs
 {
-    [QnAMaker(subscriptionKey: "<QnAMaker Subscription Key>", 
-              knowledgebaseId: "<QnA Maker KB ID>", 
-              scoreThreshold: 0.5D, 
-              top: 3)]
+    [QnAMaker(subscriptionKey: "<QnAMaker Subscription Key>",
+        knowledgebaseId: "<QnA Maker KB ID>",
+        scoreThreshold: 0.5D,
+        top: 3)]
     [Serializable]
     public class QnADialogFr : QnAMakerDialog
     {
-        protected override Task DefaultWaitNextMessageAsync(IDialogContext context, IMessageActivity message, QnAMakerResults result)
+        protected override Task DefaultWaitNextMessageAsync(IDialogContext context, IMessageActivity message,
+            QnAMakerResults result)
         {
             return base.DefaultWaitNextMessageAsync(context, message, result);
         }
@@ -28,7 +29,8 @@ namespace MultilingualQnA.Dialogs
             return base.QnAFeedbackStepAsync(context, qnaMakerResults);
         }
 
-        protected override Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message, QnAMakerResults result)
+        protected override Task RespondFromQnAMakerResultAsync(IDialogContext context, IMessageActivity message,
+            QnAMakerResults result)
         {
             return base.RespondFromQnAMakerResultAsync(context, message, result);
         }

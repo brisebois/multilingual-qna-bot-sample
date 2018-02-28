@@ -36,7 +36,8 @@ namespace MultilingualQnA.Dialogs
                 }
                 else
                 {
-                    await context.PostAsync(string.Format(Resources.dontUnderstandThatLanguage, CultureInfo.GetCultureInfo(language.Iso6391Name).DisplayName));
+                    await context.PostAsync(string.Format(Resources.dontUnderstandThatLanguage,
+                        CultureInfo.GetCultureInfo(language.Iso6391Name).DisplayName));
                 }
             }
             else
@@ -45,18 +46,18 @@ namespace MultilingualQnA.Dialogs
             }
         }
 
-    private static async Task<DetectedLanguage> DetectedMessageLanguage(Activity activity)
-    {
-        var client = new TextAnalyticsAPI
+        private static async Task<DetectedLanguage> DetectedMessageLanguage(Activity activity)
         {
-            AzureRegion = AzureRegions.Eastus2,
-            SubscriptionKey = " {VALUE} "
-        };
+            var client = new TextAnalyticsAPI
+            {
+                AzureRegion = AzureRegions.Eastus2,
+                SubscriptionKey = " {VALUE} "
+            };
 
-        var query = new TextAnalysisQuery(activity.Text);
-        var language = await query.Execute(client);
-        return language;
-    }
+            var query = new TextAnalysisQuery(activity.Text);
+            var language = await query.Execute(client);
+            return language;
+        }
 
         private Task Resume(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
