@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
@@ -28,17 +29,20 @@ namespace MultilingualQnA.Dialogs
 
                 if (language.Iso6391Name == "en")
                 {
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
                     await context.Forward(new QnADialogEn(), Resume, activity);
                 }
                 else if (language.Iso6391Name == "fr")
                 {
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
                     await context.Forward(new QnADialogFr(), Resume, activity);
                 }
                 else
                 {
-                    await context.PostAsync(string.Format(Resources.dontUnderstandThatLanguage,
-                        CultureInfo.GetCultureInfo(language.Iso6391Name).DisplayName));
+                    await context.PostAsync(string.Format(Resources.DontUnderstandThatLanguage));
                 }
+
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
             }
             else
             {
@@ -51,7 +55,7 @@ namespace MultilingualQnA.Dialogs
             var client = new TextAnalyticsAPI
             {
                 AzureRegion = AzureRegions.Eastus2,
-                SubscriptionKey = " {VALUE} "
+                SubscriptionKey = "e6dcf50d8ea74655b38e4ab369750681"
             };
 
             var query = new TextAnalysisQuery(activity.Text);

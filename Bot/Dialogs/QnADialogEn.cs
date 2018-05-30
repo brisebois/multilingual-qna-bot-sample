@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using Microsoft.Bot.Builder.CognitiveServices.QnAMaker;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using MultilingualQnA.Properties;
 
 namespace MultilingualQnA.Dialogs
 {
+
     [Serializable]
-    [QnAMaker(subscriptionKey: "<QnAMaker Subscription Key>",
-        knowledgebaseId: "<QnA Maker KB ID>",
-        scoreThreshold: 0.5D,
-        top: 3)]
     public class QnADialogEn : QnAMakerDialog
     {
+        public QnADialogEn() : base(new QnAMakerService(new QnAMakerAttribute(
+            CloudConfigurationManager.GetSetting("EN-QnaSubscriptionKey"),
+            CloudConfigurationManager.GetSetting("EN-QnaKnowledgebaseId"),
+            Resources.NotFound,
+            0.3d,
+            3,
+            CloudConfigurationManager.GetSetting("EN-QnaEndpointHostName"))))
+        {
+        }
         protected override Task DefaultWaitNextMessageAsync(IDialogContext context, IMessageActivity message,
             QnAMakerResults result)
         {

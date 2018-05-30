@@ -27,11 +27,13 @@ namespace MultilingualQnA.Services
             // More than one language could be matched at the same max score...
             // this can cause some confusion
 
-            var detectedLanguage = result.Documents.First()
-                .DetectedLanguages
-                .Where(dl => dl.Score.HasValue)
+            var detectedLanguages = result.Documents.First()
+                .DetectedLanguages;
+
+            var detectedLanguage = detectedLanguages.Where(dl => dl.Score.HasValue 
+                          && new[] { "en", "fr" }.Contains(dl.Iso6391Name))
                 .OrderByDescending(dl => dl.Score)
-                .First();
+                .FirstOrDefault();
 
             return detectedLanguage;
         }

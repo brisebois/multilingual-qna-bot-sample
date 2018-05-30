@@ -61,29 +61,20 @@ namespace MultilingualQnA.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, I don&apos;t understand {0}.
+        ///   Looks up a localized string similar to Sorry, I don&apos;t understand.
         /// </summary>
-        internal static string dontUnderstandThatLanguage {
+        internal static string DontUnderstandThatLanguage {
             get {
-                return ResourceManager.GetString("dontUnderstandThatLanguage", resourceCulture);
+                return ResourceManager.GetString("DontUnderstandThatLanguage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hi, I can help you with questions regarding the Microsoft Bot Framework.
+        ///   Looks up a localized string similar to Sorry, I couldn&apos;t find an answer for that.
         /// </summary>
-        internal static string welcomeMessage {
+        internal static string NotFound {
             get {
-                return ResourceManager.GetString("welcomeMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You&apos;re welcome.
-        /// </summary>
-        internal static string youreWelcome {
-            get {
-                return ResourceManager.GetString("youreWelcome", resourceCulture);
+                return ResourceManager.GetString("NotFound", resourceCulture);
             }
         }
     }

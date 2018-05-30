@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="dontUnderstandThatLanguage" xml:space="preserve">
-    <value>I'm sorry, I don't understand {0}</value>
+  <data name="DontUnderstandThatLanguage" xml:space="preserve">
+    <value>Sorry, I don't understand</value>
   </data>
-  <data name="welcomeMessage" xml:space="preserve">
-    <value>Hi, I can help you with questions regarding the Microsoft Bot Framework</value>
-  </data>
-  <data name="youreWelcome" xml:space="preserve">
-    <value>You're welcome</value>
+  <data name="NotFound" xml:space="preserve">
+    <value>Sorry, I couldn't find an answer for that</value>
   </data>
 </root>
