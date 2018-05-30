@@ -7,30 +7,41 @@ This sample was built to demonstrate an approach to detecting the language of a 
 Each message is received and sent to the Text Analytics Congnitive Service. From the response, we select the language with the highest score and use it to forward the users question the the correct QnA Knowledgebase.
 
 
-
-To deploy this sample, from the [Azure Portal](http://portal.azure.com) create an [Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/) and place the instrumentation key in **ApplicationInsights.config**.
-
+To deploy this sample, from the [Azure Portal](http://portal.azure.com) create 
+- [Web App](https://docs.microsoft.com/en-us/azure/app-service/) This will be the deployment target for this sample (multilingual qna bot)
+- [Application Insights](https://docs.microsoft.com/en-us/azure/application-insights/) and place the instrumentation key in **Application Settings** for the Web App (multilingual qna bot)
+- [Text Analytics API](https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/). This Cognitive Service is used for Language detection. Add the Region and primary key from the **Keys** blade and update the **SubscriptionKey** in **Application Settings** for the Web App (multilingual qna bot)
 ```
-<InstrumentationKey> {VALUE} </InstrumentationKey>
-```
-
-Then, create two KBs at [qnamaker.ai](https://qnamaker.ai/). From this service, you need to collect the subscription key and individual KB IDs.
-
-Using these IDs, edit **QnADialogFr.cs** and **QnADialogEn.cs**.
-
-```
-[QnAMaker(subscriptionKey: "<QnAMaker Subscription Key>",
-            knowledgebaseId: "<QnA Maker KB ID>",
-            scoreThreshold: 0.5D,
-            top: 3)]
+APPINSIGHTS_INSTRUMENTATIONKEY = GUID
+TextAnalyticsApiRegion = Eastus2
+TextAnalyticsApiKey = KEY
 ```
 
-With the [Active Learning](https://qnamaker.ai/Documentation/ActiveLearning) feature, users can now help auto-learn from question variations and get them added to the knowledge base.
-To activate this feature set the **top** parameter to a number that is greater than 1.
+- [QnA Maker Service](https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/Overview/overview)
+	- Make 2 instances, this will create a Web App, Azure Search and Application Insights for each
+		- French
+		- English
+
+Then, create, train and **publish** two KBs at [qnamaker.ai](https://qnamaker.ai/). 
+From this service, you need to collect the subscription key and individual KB IDs and Endpoint Host Names. 
+These values need to be set in the **Application Settings** for the Web App (multilingual qna bot)
+
+```
+EN-QnaEndpointHostName = URL
+EN-QnaKnowledgebaseId = GUID
+EN-QnaSubscriptionKey = GUID
+
+FR-QnaEndpointHostName = URL
+FR-QnaKnowledgebaseId = GUID
+FR-QnaSubscriptionKey = GUID
+```
+
+Active Learning is enabled by default. This feature uses user input to learn question variations and to simplify thier addition knowledge base.
+To activate this feature set the **top** parameter of the QnAMakerDialog to a number that is greater than 1.
 
 > The active learning process kicks in after every 50 feedbacks sent to the service via the Train API. 
 
-The new QnAMakerDialog now does the following:
+The QnAMakerDialog now does the following:
 - Get the TopN matches from the QnA service for every query above the threshold set.
 - If the top result confidence score is significantly more than the rest of the results, show only the top answer.
 - If the TopN results have similar confidence scores, then show the prompt dialog with TopN questions.
@@ -39,35 +50,13 @@ The new QnAMakerDialog now does the following:
 
 > Remember that the learnt QnAs and the alterations need to be published explicitly by the developer, to impact the production endpoint. 
 
-Then from the [Azure Portal](http://portal.azure.com), create a [Text Analytics API](https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/). This Cognitive Service is used for Language detection. It can identify 120 languages and returns each detected language with a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
-Copy the primary key from the **Keys** blade and update the **SubscriptionKey** located in the **QnADialog.cs**.  
-```
-private static async Task<DetectedLanguage> DetectedMessageLanguage(Activity activity)
-{
-    var client = new TextAnalyticsAPI
-    {
-        AzureRegion = AzureRegions.Eastus2,
-        SubscriptionKey = " {VALUE} "
-    };
-
-    var query = new TextAnalysisQuery(activity.Text);
-    var language = await query.Execute(client);
-    return language;
-}
-```
-
-From the [Azure Portal](http://portal.azure.com), create a **Web App**. This will be the deployment target for this sample.
-
 Finally, from the [Azure Portal](http://portal.azure.com), create a [Bot Channels Registration](https://docs.microsoft.com/en-us/bot-framework/bot-service-quickstart-registration). From this step, collect the Bot ID, Microsoft App ID and Microsoft App Password.
-Use these to update the **Web.Config**.
+These values need to be set in the **Application Settings** for the Web App (multilingual qna bot)
 
 ```
-<appSettings>
-  <!-- update these with your BotId, Microsoft App Id and your Microsoft App Password-->
-  <add key="BotId" value=" {VALUE} " />
-  <add key="MicrosoftAppId" value=" {VALUE} " />
-  <add key="MicrosoftAppPassword" value=" {VALUE} " />
-</appSettings>
+BotId = BOT-ID
+MicrosoftAppId = GUID
+MicrosoftAppPassword = SECRET
 ```
 
 Now publish the sample to the previously created Web Appand you should be albe to test your bot from the **Test in Web Chat** blade located in the **Bot Channels Registration** resource.

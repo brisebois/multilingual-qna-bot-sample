@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
 using Microsoft.Bot.Builder.Dialogs;
@@ -54,8 +55,8 @@ namespace MultilingualQnA.Dialogs
         {
             var client = new TextAnalyticsAPI
             {
-                AzureRegion = AzureRegions.Eastus2,
-                SubscriptionKey = "e6dcf50d8ea74655b38e4ab369750681"
+                AzureRegion = (AzureRegions)Enum.Parse(typeof(AzureRegions),CloudConfigurationManager.GetSetting("TextAnalyticsApiRegion")),
+                SubscriptionKey = CloudConfigurationManager.GetSetting("TextAnalyticsApiKey")
             };
 
             var query = new TextAnalysisQuery(activity.Text);
